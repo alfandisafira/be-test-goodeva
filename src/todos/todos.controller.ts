@@ -13,16 +13,16 @@ export class TodosController {
 
   @Get()
   find(@Query('search') search?: string) {
-    return search ?? [];
+    return this.todosService.find(search);
   }
 
   @Post()
   create(@Body() todo: { title: string }) {
-    return todo;
+    return this.todosService.create(todo);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() todo: { title: string, status: string }) {
-    return { id, ...todo };
+  update(@Param('id') id: string, @Body() todo: { title: string, status: string, problem_desc: string }) {
+    return this.todosService.update(id, todo);
   }
 }
